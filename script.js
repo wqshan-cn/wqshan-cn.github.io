@@ -89,14 +89,9 @@
   }
 
   const figures = [
-    { src: './assets/research-figures/figure-02.webp', label: 'FIG. 02', title: 'DIFFERENTIAL EXPRESSION', alt: '论文主图 2：差异表达与通路分析' },
-    { src: './assets/research-figures/figure-03.webp', label: 'FIG. 03', title: 'MODEL CONSTRUCTION', alt: '论文主图 3：模型构建与生存分析' },
-    { src: './assets/research-figures/figure-04.webp', label: 'FIG. 04', title: 'SINGLE-CELL LANDSCAPE', alt: '论文主图 4：单细胞图谱与细胞通讯分析' },
-    { src: './assets/research-figures/figure-05.webp', label: 'FIG. 05', title: 'SPATIAL TRANSCRIPTOMICS', alt: '论文主图 5：细胞轨迹与空间转录组分析' },
-    { src: './assets/research-figures/figure-06.webp', label: 'FIG. 06', title: 'CLINICAL ASSOCIATION', alt: '论文主图 6：临床关联与通路富集分析' },
-    { src: './assets/research-figures/figure-07.webp', label: 'FIG. 07', title: 'EXPRESSION VALIDATION', alt: '论文主图 7：基因表达与临床特征验证' },
-    { src: './assets/research-figures/figure-08.webp', label: 'FIG. 08', title: 'EXPERIMENTAL VALIDATION', alt: '论文主图 8：实验验证与组织学结果' },
-    { src: './assets/research-figures/supp-02.webp', label: 'SUPP. 02', title: 'SURVIVAL ANALYSIS', alt: '论文补充图 2：生存分析曲线' }
+    { src: './assets/research-figures/figure-02.webp', label: 'FIG. 02 · A+B', title: 'DIFFERENTIAL EXPRESSION', alt: '论文主图 2：完整的 A、B 火山图 panel', crop: { width: 156.25, left: 0, top: -39.02, ratio: 1.98 } },
+    { src: './assets/research-figures/figure-04.webp', label: 'FIG. 04 · A–D', title: 'SINGLE-CELL LANDSCAPE', alt: '论文主图 4：完整的 A 至 D 单细胞分析 panel', crop: { width: 100, left: 0, top: 0, ratio: 1.63 } },
+    { src: './assets/research-figures/figure-05.webp', label: 'FIG. 05 · A+B', title: 'PSEUDOTIME TRAJECTORIES', alt: '论文主图 5：完整的 A、B 拟时序轨迹 panel', crop: { width: 100, left: 0, top: 0, ratio: 2.81 } }
   ];
   const figureCarousel = document.getElementById('figure-carousel');
   const activeFigure = document.getElementById('figure-active');
@@ -113,6 +108,11 @@
   function assignFigure(image, figure, includeAlt = false) {
     if (!image) return;
     image.src = figure.src;
+    image.style.width = figure.crop.width + '%';
+    image.style.left = figure.crop.left + '%';
+    image.style.top = figure.crop.top + '%';
+    image.parentElement.style.aspectRatio = String(figure.crop.ratio);
+    image.dataset.croppedPreview = 'true';
     if (includeAlt) image.alt = figure.alt;
   }
   function showFigure(index, direction = 1) {
