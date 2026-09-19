@@ -62,48 +62,56 @@
     <div class="section-heading"><h2 id="work-title">把想法，<span class="serif-accent">做出来。</span></h2><p>一些研究，一些代码。<br>也是认识世界的几种方式。</p></div>
     <div class="projects">
       <article class="project project-research">
-        <div class="project-visual research-visual" aria-hidden="true">
-          <div class="visual-meta"><span>RESEARCH NOTES</span><span>01 — BIO</span></div>
-          <div class="data-stack">
-            <figure class="data-sheet data-heatmap">
-              <div class="sheet-head"><span>MARKER EXPRESSION</span><b>02</b></div>
-              <svg class="bio-chart" viewBox="0 0 360 180"><g class="heatmap-labels" fill="#63715a"><text x="12" y="34">CD3D</text><text x="12" y="58">NKG7</text><text x="12" y="82">MS4A1</text><text x="12" y="106">LYZ</text><text x="12" y="130">PPBP</text></g><g id="heatmap-cells" transform="translate(58 17)"></g><path d="M59 150H344" stroke="#aab49c" stroke-width=".7"/><text x="60" y="166">T · NK · B · MONO · PLATELET</text></svg>
-              <figcaption>Marker heatmap <span>GENE × CELL TYPE</span></figcaption>
-            </figure>
-            <figure class="data-sheet data-trajectory">
-              <div class="sheet-head"><span>CELL TRAJECTORY</span><b>03</b></div>
-              <svg class="bio-chart" viewBox="0 0 360 180"><g class="trajectory-paths"><path d="M36 135C98 132 117 93 164 88S228 102 317 34"/><path d="M163 88C212 80 247 112 317 142"/><path d="M166 88C198 64 203 33 240 20"/></g><g id="trajectory-points"></g><g class="trajectory-nodes"><circle cx="37" cy="135" r="5"/><circle cx="165" cy="88" r="5"/><circle cx="317" cy="34" r="5"/><circle cx="317" cy="142" r="5"/><circle cx="240" cy="20" r="5"/></g><text x="28" y="158">ROOT</text><text x="286" y="20">STATE 1</text><text x="291" y="163">STATE 2</text></svg>
-              <figcaption>Pseudotime <span>STATE TRANSITION</span></figcaption>
-            </figure>
-            <figure class="data-sheet data-umap">
-              <div class="sheet-head"><span>SINGLE-CELL ATLAS</span><b>01</b></div>
-              <svg class="bio-chart" viewBox="0 0 360 180"><path class="axis-corner" d="M18 146V160H32"/><g id="cell-points"></g><g class="cluster-labels"><text x="75" y="52">T cells</text><text x="159" y="132">B cells</text><text x="230" y="48">Myeloid</text><text x="282" y="119">NK</text></g><text x="17" y="174">UMAP 2</text><text x="306" y="174">UMAP 1</text></svg>
-              <figcaption>Cell atlas <span>4 CLUSTERS · 320 CELLS</span></figcaption>
-            </figure>
+        <div class="project-visual research-visual">
+          <div class="visual-meta"><span>RESEARCH FIGURES / 真实文章图像</span><span id="figure-position">01 / 10</span></div>
+          <div class="figure-carousel" id="figure-carousel" tabindex="0" aria-label="文章图像轮播，可使用左右方向键切换">
+            <div class="figure-stack">
+              <figure class="figure-card figure-card-back figure-card-back-two" aria-hidden="true"><img id="figure-back-two" src="./assets/research-figures/figure-03.webp" alt=""></figure>
+              <figure class="figure-card figure-card-back figure-card-back-one" aria-hidden="true"><img id="figure-back-one" src="./assets/research-figures/figure-02.webp" alt=""></figure>
+              <figure class="figure-card figure-card-main">
+                <button type="button" class="figure-advance" id="figure-advance" aria-label="显示下一张文章图像"><img id="figure-active" src="./assets/research-figures/figure-01.webp" alt="论文主图 1：研究流程图"></button>
+                <figcaption><span id="figure-label">FIG. 01</span><span id="figure-title">STUDY WORKFLOW</span></figcaption>
+              </figure>
+            </div>
+            <div class="figure-controls">
+              <button type="button" id="figure-prev" aria-label="上一张文章图像">←</button>
+              <div class="figure-index" role="tablist" aria-label="选择文章图像">
+                <button type="button" role="tab" aria-selected="true" data-figure="0" aria-label="主图 1">1</button><button type="button" role="tab" aria-selected="false" data-figure="1" aria-label="主图 2">2</button><button type="button" role="tab" aria-selected="false" data-figure="2" aria-label="主图 3">3</button><button type="button" role="tab" aria-selected="false" data-figure="3" aria-label="主图 4">4</button><button type="button" role="tab" aria-selected="false" data-figure="4" aria-label="主图 5">5</button><button type="button" role="tab" aria-selected="false" data-figure="5" aria-label="主图 6">6</button><button type="button" role="tab" aria-selected="false" data-figure="6" aria-label="主图 7">7</button><button type="button" role="tab" aria-selected="false" data-figure="7" aria-label="主图 8">8</button><button type="button" role="tab" aria-selected="false" data-figure="8" aria-label="补充图 1">S1</button><button type="button" role="tab" aria-selected="false" data-figure="9" aria-label="补充图 2">S2</button>
+              </div>
+              <button type="button" id="figure-next" aria-label="下一张文章图像">→</button>
+              <button type="button" class="figure-expand" id="figure-expand">查看完整图 ↗</button>
+            </div>
           </div>
-          <span class="visual-caption">UMAP · 表达热图 · 拟时序轨迹 <small>· 概念示意，非实验数据</small></span>
         </div>
-        <div class="project-body"><div class="project-category"><span>生物信息 / RESEARCH</span><span class="project-index">01</span></div><h3>让数据，说出生命的故事。</h3><p>从文献复现到生信分析，尝试用单细胞与机器学习的方法，理解细胞、通路和疾病之间的联系。</p><div class="project-bottom"><div class="tags"><span>R</span><span>单细胞</span><span>机器学习</span></div><span class="project-note">持续探索中</span></div></div>
+        <dialog class="figure-lightbox" id="figure-lightbox"><button type="button" class="lightbox-close" id="lightbox-close" aria-label="关闭完整图">关闭 ×</button><figure><img id="lightbox-image" src="./assets/research-figures/figure-01.webp" alt="论文主图 1：研究流程图，完整图"><figcaption><span id="lightbox-label">FIG. 01</span><span id="lightbox-title">STUDY WORKFLOW</span></figcaption></figure></dialog>
+        <div class="project-body"><div class="project-category"><span>生物信息 / RESEARCH</span><span class="project-index">01</span></div><h3>让真实数据，讲述生命的故事。</h3><p>从研究流程、生信分析到单细胞与空间图谱，这里展示的是文章中的真实图像。点击翻阅，也可以打开完整图查看所有 panel。</p><div class="project-bottom"><div class="tags"><span>R</span><span>单细胞</span><span>多组学</span></div><span class="project-note">10 张文章图像</span></div></div>
       </article>
       <article class="project project-code">
         <div class="project-visual code-visual">
-          <div class="visual-meta"><span>OPEN SOURCE NOTES</span><span>02 — BUILD</span></div>
-          <div class="pr-stack" aria-label="三次 Reasonix 开源贡献">
-            <a class="pr-sheet pr-rich-link" href="https://github.com/esengine/DeepSeek-Reasonix/pull/6976" target="_blank" rel="noopener noreferrer">
-              <div class="pr-head"><span>PR #6976</span><b>MERGED</b></div><h4>Rich Markdown links</h4>
-              <div class="rich-link-preview" aria-hidden="true"><span class="raw-link">github.com/…/pull/6976</span><i>→</i><span class="compact-link"><b>⑂</b> DeepSeek-Reasonix #6976</span></div>
-              <div class="pr-foot"><span>ACCESSIBILITY · UI</span><span>28 RENDER TESTS</span></div>
-            </a>
-            <a class="pr-sheet pr-composer" href="https://github.com/esengine/DeepSeek-Reasonix/pull/9142" target="_blank" rel="noopener noreferrer">
-              <div class="pr-head"><span>PR #9142</span><b>MERGED</b></div><h4>Auto-grow resized composer</h4>
-              <div class="composer-preview" aria-hidden="true"><div class="composer-lines"><i></i><i></i><i></i><i></i></div><span>saved height</span><b>↕</b><small>content grows, then scrolls</small></div>
-              <div class="pr-foot"><span>DESKTOP · UX</span><span>12 + 7 + 64 TESTS</span></div>
-            </a>
-            <a class="pr-sheet pr-context" href="https://github.com/esengine/DeepSeek-Reasonix/pull/9823" target="_blank" rel="noopener noreferrer">
-              <div class="pr-head"><span>PR #9823 → #9824</span><b>CO-AUTHORED</b></div><h4>Context menus for rich links</h4>
-              <div class="context-preview" aria-hidden="true"><span class="context-link">github.com/example/repo/pull/42</span><div><i>↗</i> Open in browser</div><div><i>⧉</i> Copy reference</div></div>
-              <div class="pr-foot"><span>INTEGRATED BY MAINTAINER</span><span>31 ASSERTIONS</span></div>
-            </a>
+          <div class="visual-meta"><span>OPEN SOURCE CASEBOOK</span><span>02 — BUILD</span></div>
+          <div class="casebook" id="casebook">
+            <div class="case-tabs" role="tablist" aria-label="选择开源贡献案例">
+              <button type="button" role="tab" id="case-tab-6976" aria-selected="true" aria-controls="case-6976" data-case="0"><span>01</span><b>#6976</b><small>RICH LINKS</small></button>
+              <button type="button" role="tab" id="case-tab-9142" aria-selected="false" aria-controls="case-9142" data-case="1" tabindex="-1"><span>02</span><b>#9142</b><small>COMPOSER</small></button>
+              <button type="button" role="tab" id="case-tab-9823" aria-selected="false" aria-controls="case-9823" data-case="2" tabindex="-1"><span>03</span><b>#9823</b><small>CONTEXT MENU</small></button>
+            </div>
+            <div class="case-stage">
+              <article class="case-panel" id="case-6976" role="tabpanel" aria-labelledby="case-tab-6976">
+                <div class="case-topline"><span>MERGED · UI / ACCESSIBILITY</span><span>01 / 03</span></div><h4>让长链接，更容易被读懂。</h4>
+                <div class="case-layout"><div class="case-demo case-demo-links" aria-hidden="true"><span class="demo-raw">github.com/esengine/…/pull/6976</span><i>↓ compact, but still copyable</i><span class="demo-rich"><b>⑂</b> DeepSeek-Reasonix <em>Pull request #6976</em></span></div><div class="case-notes"><p><span>PROBLEM</span>原始链接难以快速扫描</p><p><span>CHANGE</span>图标、短标签与完整可复制文本并存</p><p class="case-proof"><strong>111</strong><span>focused checks</span></p></div></div>
+                <a class="case-open" href="https://github.com/esengine/DeepSeek-Reasonix/pull/6976" target="_blank" rel="noopener noreferrer">查看 PR #6976 <span>↗</span></a>
+              </article>
+              <article class="case-panel" id="case-9142" role="tabpanel" aria-labelledby="case-tab-9142" hidden>
+                <div class="case-topline"><span>MERGED · DESKTOP / UX</span><span>02 / 03</span></div><h4>让编辑器，跟着长文本一起生长。</h4>
+                <div class="case-layout"><div class="case-demo case-demo-composer" aria-hidden="true"><div><i></i><i></i><i></i><i></i><i></i></div><span>saved height = minimum</span><b>↕</b><small>grow · shrink · viewport cap</small></div><div class="case-notes"><p><span>PROBLEM</span>手动调整后长内容无法继续扩展</p><p><span>CHANGE</span>保存高度成为下限，而不是硬上限</p><p class="case-proof"><strong>83</strong><span>focused tests</span></p></div></div>
+                <a class="case-open" href="https://github.com/esengine/DeepSeek-Reasonix/pull/9142" target="_blank" rel="noopener noreferrer">查看 PR #9142 <span>↗</span></a>
+              </article>
+              <article class="case-panel" id="case-9823" role="tabpanel" aria-labelledby="case-tab-9823" hidden>
+                <div class="case-topline"><span>INTEGRATED · CO-AUTHORED</span><span>03 / 03</span></div><h4>把链接操作，放进顺手的菜单。</h4>
+                <div class="case-layout"><div class="case-demo case-demo-menu" aria-hidden="true"><span>github.com/example/repo/pull/42</span><div><i>↗</i> Open in browser</div><div><i>⧉</i> Copy reference</div><div><i>@</i> Copy email address</div></div><div class="case-notes"><p><span>PROBLEM</span>非本地链接缺少右键与键盘操作</p><p><span>CHANGE</span>功能由维护者通过 #9824 完成整合</p><p class="case-proof"><strong>31</strong><span>interaction assertions</span></p></div></div>
+                <a class="case-open" href="https://github.com/esengine/DeepSeek-Reasonix/pull/9823" target="_blank" rel="noopener noreferrer">查看贡献记录 <span>↗</span></a>
+              </article>
+            </div>
           </div>
         </div>
         <div class="project-body"><div class="project-category"><span>开源贡献 / OPEN SOURCE</span><span class="project-index">02</span></div><h3>把三次贡献，叠成一段开源经历。</h3><p>两个 PR 由项目直接合并；第三项由维护者接手整合，并在最终提交中保留共同署名。从交互细节到编辑体验，每一次修改都留下了真实痕迹。</p><div class="project-bottom"><div class="tags"><span>2 MERGED</span><span>1 CO-AUTHORED</span></div><a class="text-link project-link" href="https://github.com/esengine/DeepSeek-Reasonix/pulls?q=is%3Apr+author%3Awqshan-cn" target="_blank" rel="noopener noreferrer" aria-label="在新标签页查看 Reasonix 贡献记录">查看贡献 <span aria-hidden="true">↗</span></a></div></div>

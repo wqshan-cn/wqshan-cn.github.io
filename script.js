@@ -1,70 +1,5 @@
 (() => {
   'use strict';
-  // Decorative, deterministic single-cell atlas. These are illustrations, not research data.
-  const group = document.getElementById('cell-points');
-  if (group) {
-    const clusters = [
-      [89, 78, 47, 28, '#788960'], [159, 121, 33, 21, '#a4aa70'],
-      [233, 61, 43, 27, '#b7664b'], [289, 113, 34, 25, '#526f5e']
-    ];
-    clusters.forEach(([cx, cy, rx, ry, color], cluster) => {
-      const clusterGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-      clusterGroup.classList.add('cell-cluster');
-      clusterGroup.style.setProperty('--cluster-delay', (cluster * 130) + 'ms');
-      for (let i = 0; i < 80; i++) {
-        const angle = i * 2.39996 + cluster;
-        const radius = Math.sqrt((i + .5) / 80);
-        const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-        dot.setAttribute('cx', (cx + Math.cos(angle) * rx * radius).toFixed(2));
-        dot.setAttribute('cy', (cy + Math.sin(angle) * ry * radius + Math.sin(i * .7) * 4).toFixed(2));
-        dot.setAttribute('r', (1.3 + (i % 3) * .35).toFixed(2));
-        dot.setAttribute('fill', color);
-        dot.setAttribute('opacity', '.75');
-        clusterGroup.append(dot);
-      }
-      group.append(clusterGroup);
-    });
-  }
-
-  const heatmap = document.getElementById('heatmap-cells');
-  if (heatmap) {
-    const palette = ['#e8ebdf', '#d2dbc5', '#afc09d', '#778f70', '#b96a54'];
-    for (let row = 0; row < 5; row++) {
-      for (let col = 0; col < 12; col++) {
-        const cell = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-        const signal = (row * 7 + col * 3 + (row === Math.floor(col / 2) ? 4 : 0)) % palette.length;
-        cell.setAttribute('x', String(col * 23.5));
-        cell.setAttribute('y', String(row * 24));
-        cell.setAttribute('width', '20');
-        cell.setAttribute('height', '20');
-        cell.setAttribute('rx', '1.5');
-        cell.setAttribute('fill', palette[signal]);
-        heatmap.append(cell);
-      }
-    }
-  }
-
-  const trajectory = document.getElementById('trajectory-points');
-  if (trajectory) {
-    const branches = [
-      [[38, 135], [165, 88], '#728a6c'], [[165, 88], [317, 34], '#b96852'],
-      [[165, 88], [317, 142], '#9da968'], [[165, 88], [240, 20], '#587568']
-    ];
-    branches.forEach(([[x1, y1], [x2, y2], color], branch) => {
-      for (let i = 0; i < 24; i++) {
-        const t = i / 23;
-        const bend = Math.sin(t * Math.PI) * (branch % 2 ? -12 : 12);
-        const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-        dot.setAttribute('cx', (x1 + (x2 - x1) * t + Math.sin(i * 2.1 + branch) * 4).toFixed(2));
-        dot.setAttribute('cy', (y1 + (y2 - y1) * t + bend + Math.cos(i * 1.7) * 3).toFixed(2));
-        dot.setAttribute('r', (1.5 + (i % 3) * .35).toFixed(2));
-        dot.setAttribute('fill', color);
-        dot.setAttribute('opacity', '.76');
-        trajectory.append(dot);
-      }
-    });
-  }
-
   // Native anchor links still work without JavaScript. This only tracks location.
   const links = [...document.querySelectorAll('nav a[href^="#"]')];
   const sections = links.map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean);
@@ -143,6 +78,128 @@
   motionQuery.addEventListener('change', applyMotionPreference);
   pointerQuery.addEventListener('change', resetArt);
   applyMotionPreference();
+
+  function playTransient(element, keyframes, options) {
+    if (!motionEnabled || !element?.animate) return;
+    const animation = element.animate(keyframes, options);
+    runningReveals.add(animation);
+    const cleanup = () => runningReveals.delete(animation);
+    animation.addEventListener('finish', cleanup, { once: true });
+    animation.addEventListener('cancel', cleanup, { once: true });
+  }
+
+  const figures = [
+    { src: './assets/research-figures/figure-01.webp', label: 'FIG. 01', title: 'STUDY WORKFLOW', alt: '论文主图 1：研究流程图', position: '50% 50%' },
+    { src: './assets/research-figures/figure-02.webp', label: 'FIG. 02', title: 'DIFFERENTIAL EXPRESSION', alt: '论文主图 2：差异表达与通路分析', position: '50% 28%' },
+    { src: './assets/research-figures/figure-03.webp', label: 'FIG. 03', title: 'MODEL CONSTRUCTION', alt: '论文主图 3：模型构建与生存分析', position: '50% 34%' },
+    { src: './assets/research-figures/figure-04.webp', label: 'FIG. 04', title: 'SINGLE-CELL LANDSCAPE', alt: '论文主图 4：单细胞图谱与细胞通讯分析', position: '50% 29%' },
+    { src: './assets/research-figures/figure-05.webp', label: 'FIG. 05', title: 'SPATIAL TRANSCRIPTOMICS', alt: '论文主图 5：细胞轨迹与空间转录组分析', position: '50% 33%' },
+    { src: './assets/research-figures/figure-06.webp', label: 'FIG. 06', title: 'CLINICAL ASSOCIATION', alt: '论文主图 6：临床关联与通路富集分析', position: '50% 30%' },
+    { src: './assets/research-figures/figure-07.webp', label: 'FIG. 07', title: 'EXPRESSION VALIDATION', alt: '论文主图 7：基因表达与临床特征验证', position: '50% 30%' },
+    { src: './assets/research-figures/figure-08.webp', label: 'FIG. 08', title: 'EXPERIMENTAL VALIDATION', alt: '论文主图 8：实验验证与组织学结果', position: '50% 27%' },
+    { src: './assets/research-figures/supp-01.webp', label: 'SUPP. 01', title: 'EXPRESSION HEATMAPS', alt: '论文补充图 1：差异表达热图', position: '50% 50%' },
+    { src: './assets/research-figures/supp-02.webp', label: 'SUPP. 02', title: 'SURVIVAL ANALYSIS', alt: '论文补充图 2：生存分析曲线', position: '50% 35%' }
+  ];
+  const figureCarousel = document.getElementById('figure-carousel');
+  const activeFigure = document.getElementById('figure-active');
+  const backOne = document.getElementById('figure-back-one');
+  const backTwo = document.getElementById('figure-back-two');
+  const figureLabel = document.getElementById('figure-label');
+  const figureTitle = document.getElementById('figure-title');
+  const figurePosition = document.getElementById('figure-position');
+  const figureTabs = [...document.querySelectorAll('[data-figure]')];
+  const lightbox = document.getElementById('figure-lightbox');
+  const lightboxImage = document.getElementById('lightbox-image');
+  let currentFigure = 0;
+
+  function assignFigure(image, figure, includeAlt = false) {
+    if (!image) return;
+    image.src = figure.src;
+    image.style.objectPosition = figure.position;
+    if (includeAlt) image.alt = figure.alt;
+  }
+  function showFigure(index, direction = 1) {
+    currentFigure = (index + figures.length) % figures.length;
+    const current = figures[currentFigure];
+    assignFigure(activeFigure, current, true);
+    assignFigure(backOne, figures[(currentFigure + 1) % figures.length]);
+    assignFigure(backTwo, figures[(currentFigure + 2) % figures.length]);
+    figureLabel.textContent = current.label;
+    figureTitle.textContent = current.title;
+    figurePosition.textContent = String(currentFigure + 1).padStart(2, '0') + ' / ' + figures.length;
+    figureTabs.forEach((tab, tabIndex) => {
+      const selected = tabIndex === currentFigure;
+      tab.setAttribute('aria-selected', String(selected));
+      tab.tabIndex = selected ? 0 : -1;
+    });
+    figureCarousel.dataset.current = String(currentFigure);
+    playTransient(activeFigure, [
+      { opacity: .2, transform: `translateX(${direction * 14}px) scale(1.015)` },
+      { opacity: 1, transform: 'translateX(0) scale(1)' }
+    ], { duration: 420, easing: 'cubic-bezier(.16,1,.3,1)' });
+  }
+  document.getElementById('figure-next')?.addEventListener('click', () => showFigure(currentFigure + 1, 1));
+  document.getElementById('figure-prev')?.addEventListener('click', () => showFigure(currentFigure - 1, -1));
+  figureTabs.forEach(tab => tab.addEventListener('click', () => showFigure(Number(tab.dataset.figure), Number(tab.dataset.figure) >= currentFigure ? 1 : -1)));
+  let pointerStart = null;
+  let swipeHandled = false;
+  document.querySelector('.figure-stack')?.addEventListener('pointerdown', event => { pointerStart = event.clientX; swipeHandled = false; });
+  document.querySelector('.figure-stack')?.addEventListener('pointerup', event => {
+    if (pointerStart === null) return;
+    const distance = event.clientX - pointerStart;
+    pointerStart = null;
+    if (Math.abs(distance) < 45) return;
+    swipeHandled = true;
+    showFigure(currentFigure + (distance < 0 ? 1 : -1), distance < 0 ? 1 : -1);
+  });
+  document.getElementById('figure-advance')?.addEventListener('click', () => {
+    if (swipeHandled) { swipeHandled = false; return; }
+    showFigure(currentFigure + 1, 1);
+  });
+  figureCarousel?.addEventListener('keydown', event => {
+    if (!['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
+    event.preventDefault();
+    showFigure(currentFigure + (event.key === 'ArrowRight' ? 1 : -1), event.key === 'ArrowRight' ? 1 : -1);
+  });
+  document.getElementById('figure-expand')?.addEventListener('click', () => {
+    const current = figures[currentFigure];
+    lightboxImage.src = current.src;
+    lightboxImage.alt = current.alt + '，完整图';
+    document.getElementById('lightbox-label').textContent = current.label;
+    document.getElementById('lightbox-title').textContent = current.title;
+    if (lightbox?.showModal) lightbox.showModal();
+  });
+  document.getElementById('lightbox-close')?.addEventListener('click', () => lightbox?.close());
+  lightbox?.addEventListener('click', event => { if (event.target === lightbox) lightbox.close(); });
+  showFigure(0, 1);
+
+  const caseTabs = [...document.querySelectorAll('[data-case]')];
+  const casePanels = [...document.querySelectorAll('.case-panel')];
+  function showCase(index, focusTab = false) {
+    const nextIndex = (index + caseTabs.length) % caseTabs.length;
+    caseTabs.forEach((tab, tabIndex) => {
+      const selected = tabIndex === nextIndex;
+      tab.setAttribute('aria-selected', String(selected));
+      tab.tabIndex = selected ? 0 : -1;
+      casePanels[tabIndex].hidden = !selected;
+    });
+    const panel = casePanels[nextIndex];
+    playTransient(panel, [
+      { opacity: 0, transform: 'translateY(12px)' },
+      { opacity: 1, transform: 'translateY(0)' }
+    ], { duration: 430, easing: 'cubic-bezier(.16,1,.3,1)' });
+    document.getElementById('casebook').dataset.current = String(nextIndex);
+    if (focusTab) caseTabs[nextIndex].focus();
+  }
+  caseTabs.forEach((tab, index) => {
+    tab.addEventListener('click', () => showCase(index));
+    tab.addEventListener('keydown', event => {
+      if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+      event.preventDefault();
+      const next = event.key === 'Home' ? 0 : event.key === 'End' ? caseTabs.length - 1 : index + (event.key === 'ArrowRight' ? 1 : -1);
+      showCase(next, true);
+    });
+  });
 
   if ('IntersectionObserver' in window) {
     const revealGroups = [
