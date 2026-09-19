@@ -45,7 +45,7 @@
       <div class="about-story">
         <p class="lead">我是一名不甘心只背书的临床医学生，<br class="desktop-break">也喜欢把“如果可以”变成“试试看”。</p>
         <p>从大一加入课题组，到用 R 跑分析、画图、复现文献，生物信息慢慢成了我的日常。两年多的摸索，沉淀为两篇生信 SCI，也让我学会从数据里提出问题。</p>
-        <p>后来遇见 AI Agent，我开始沉迷 vibecoding。在 Reasonix 提交并合并了三个 PR，也第一次体会到：自己做的小东西，可以成为别人工作的一部分。</p>
+        <p>后来遇见 AI Agent，我开始沉迷 vibecoding。在 Reasonix 的三次贡献中，两个 PR 直接合并，另一个由维护者整合并保留共同署名。也正是在这里，我第一次体会到：自己做的小东西，可以成为别人工作的一部分。</p>
         <p>这个小站记录科研、代码，也记录一路摸索的我。无论你是同路人，还是偶然路过的朋友，都欢迎在这里坐一会儿。</p>
         <div class="profile-line"><span>日常语言 <b>中文 / R / Prompt</b></span><span>持续练习 <b>养细胞 &amp; 写代码</b></span></div>
       </div>
@@ -53,7 +53,7 @@
     <div class="milestones" aria-label="个人经历概览">
       <div><span class="milestone-number">02<span>+</span></span><p>年课题组经历<small>LEARNING BY DOING</small></p></div>
       <div><span class="milestone-number">02</span><p>篇生信 SCI<small>FROM QUESTION TO PAPER</small></p></div>
-      <div><span class="milestone-number">03</span><p>个已合并 PR<small>FIRST STEPS IN OPEN SOURCE</small></p></div>
+      <div><span class="milestone-number">02<span>+01</span></span><p>合并与署名贡献<small>MERGED &amp; CO-AUTHORED</small></p></div>
     </div>
   </section>
 
@@ -64,17 +64,49 @@
       <article class="project project-research">
         <div class="project-visual research-visual" aria-hidden="true">
           <div class="visual-meta"><span>RESEARCH NOTES</span><span>01 — BIO</span></div>
-          <svg class="research-chart" viewBox="0 0 500 235"><g class="chart-grid"><path d="M50 25V195H460 M50 75H460 M50 125H460 M50 175H460 M130 25V195 M210 25V195 M290 25V195 M370 25V195 M450 25V195"/></g><g id="cell-points"></g><text x="52" y="218">CURIOSITY → OBSERVATION → INSIGHT</text></svg>
-          <span class="visual-caption">从细胞出发，在数据中寻找线索 <small>· 概念示意</small></span>
+          <div class="data-stack">
+            <figure class="data-sheet data-heatmap">
+              <div class="sheet-head"><span>MARKER EXPRESSION</span><b>02</b></div>
+              <svg class="bio-chart" viewBox="0 0 360 180"><g class="heatmap-labels" fill="#63715a"><text x="12" y="34">CD3D</text><text x="12" y="58">NKG7</text><text x="12" y="82">MS4A1</text><text x="12" y="106">LYZ</text><text x="12" y="130">PPBP</text></g><g id="heatmap-cells" transform="translate(58 17)"></g><path d="M59 150H344" stroke="#aab49c" stroke-width=".7"/><text x="60" y="166">T · NK · B · MONO · PLATELET</text></svg>
+              <figcaption>Marker heatmap <span>GENE × CELL TYPE</span></figcaption>
+            </figure>
+            <figure class="data-sheet data-trajectory">
+              <div class="sheet-head"><span>CELL TRAJECTORY</span><b>03</b></div>
+              <svg class="bio-chart" viewBox="0 0 360 180"><g class="trajectory-paths"><path d="M36 135C98 132 117 93 164 88S228 102 317 34"/><path d="M163 88C212 80 247 112 317 142"/><path d="M166 88C198 64 203 33 240 20"/></g><g id="trajectory-points"></g><g class="trajectory-nodes"><circle cx="37" cy="135" r="5"/><circle cx="165" cy="88" r="5"/><circle cx="317" cy="34" r="5"/><circle cx="317" cy="142" r="5"/><circle cx="240" cy="20" r="5"/></g><text x="28" y="158">ROOT</text><text x="286" y="20">STATE 1</text><text x="291" y="163">STATE 2</text></svg>
+              <figcaption>Pseudotime <span>STATE TRANSITION</span></figcaption>
+            </figure>
+            <figure class="data-sheet data-umap">
+              <div class="sheet-head"><span>SINGLE-CELL ATLAS</span><b>01</b></div>
+              <svg class="bio-chart" viewBox="0 0 360 180"><path class="axis-corner" d="M18 146V160H32"/><g id="cell-points"></g><g class="cluster-labels"><text x="75" y="52">T cells</text><text x="159" y="132">B cells</text><text x="230" y="48">Myeloid</text><text x="282" y="119">NK</text></g><text x="17" y="174">UMAP 2</text><text x="306" y="174">UMAP 1</text></svg>
+              <figcaption>Cell atlas <span>4 CLUSTERS · 320 CELLS</span></figcaption>
+            </figure>
+          </div>
+          <span class="visual-caption">UMAP · 表达热图 · 拟时序轨迹 <small>· 概念示意，非实验数据</small></span>
         </div>
         <div class="project-body"><div class="project-category"><span>生物信息 / RESEARCH</span><span class="project-index">01</span></div><h3>让数据，说出生命的故事。</h3><p>从文献复现到生信分析，尝试用单细胞与机器学习的方法，理解细胞、通路和疾病之间的联系。</p><div class="project-bottom"><div class="tags"><span>R</span><span>单细胞</span><span>机器学习</span></div><span class="project-note">持续探索中</span></div></div>
       </article>
       <article class="project project-code">
-        <div class="project-visual code-visual" aria-hidden="true">
+        <div class="project-visual code-visual">
           <div class="visual-meta"><span>OPEN SOURCE NOTES</span><span>02 — BUILD</span></div>
-          <div class="code-window"><div class="window-dots"><i></i><i></i><i></i><span>a small contribution</span></div><code><span class="code-muted">// 从“我试试”到“已合并”</span><br><span class="code-keyword">const</span> idea = <span class="code-string">"make it useful"</span>;<br><span class="code-keyword">await</span> curiosity.build(idea);</code><div class="merge-line"><span>⑂</span> Pull request merged <b>✓</b></div></div>
+          <div class="pr-stack" aria-label="三次 Reasonix 开源贡献">
+            <a class="pr-sheet pr-rich-link" href="https://github.com/esengine/DeepSeek-Reasonix/pull/6976" target="_blank" rel="noopener noreferrer">
+              <div class="pr-head"><span>PR #6976</span><b>MERGED</b></div><h4>Rich Markdown links</h4>
+              <div class="rich-link-preview" aria-hidden="true"><span class="raw-link">github.com/…/pull/6976</span><i>→</i><span class="compact-link"><b>⑂</b> DeepSeek-Reasonix #6976</span></div>
+              <div class="pr-foot"><span>ACCESSIBILITY · UI</span><span>28 RENDER TESTS</span></div>
+            </a>
+            <a class="pr-sheet pr-composer" href="https://github.com/esengine/DeepSeek-Reasonix/pull/9142" target="_blank" rel="noopener noreferrer">
+              <div class="pr-head"><span>PR #9142</span><b>MERGED</b></div><h4>Auto-grow resized composer</h4>
+              <div class="composer-preview" aria-hidden="true"><div class="composer-lines"><i></i><i></i><i></i><i></i></div><span>saved height</span><b>↕</b><small>content grows, then scrolls</small></div>
+              <div class="pr-foot"><span>DESKTOP · UX</span><span>12 + 7 + 64 TESTS</span></div>
+            </a>
+            <a class="pr-sheet pr-context" href="https://github.com/esengine/DeepSeek-Reasonix/pull/9823" target="_blank" rel="noopener noreferrer">
+              <div class="pr-head"><span>PR #9823 → #9824</span><b>CO-AUTHORED</b></div><h4>Context menus for rich links</h4>
+              <div class="context-preview" aria-hidden="true"><span class="context-link">github.com/example/repo/pull/42</span><div><i>↗</i> Open in browser</div><div><i>⧉</i> Copy reference</div></div>
+              <div class="pr-foot"><span>INTEGRATED BY MAINTAINER</span><span>31 ASSERTIONS</span></div>
+            </a>
+          </div>
         </div>
-        <div class="project-body"><div class="project-category"><span>开源贡献 / OPEN SOURCE</span><span class="project-index">02</span></div><h3>给 Reasonix，添三块积木。</h3><p>在 AI 编程工具的开源项目里，走过阅读源码、尝试修改、提交 PR 到合并的完整过程。小小参与，真实发生。</p><div class="project-bottom"><div class="tags"><span>AI Agent</span><span>Git &amp; PR</span></div><a class="text-link project-link" href="https://github.com/wqshan-cn/DeepSeek-Reasonix" target="_blank" rel="noopener noreferrer" aria-label="在新标签页查看 Reasonix GitHub 仓库">查看仓库 <span aria-hidden="true">↗</span></a></div></div>
+        <div class="project-body"><div class="project-category"><span>开源贡献 / OPEN SOURCE</span><span class="project-index">02</span></div><h3>把三次贡献，叠成一段开源经历。</h3><p>两个 PR 由项目直接合并；第三项由维护者接手整合，并在最终提交中保留共同署名。从交互细节到编辑体验，每一次修改都留下了真实痕迹。</p><div class="project-bottom"><div class="tags"><span>2 MERGED</span><span>1 CO-AUTHORED</span></div><a class="text-link project-link" href="https://github.com/esengine/DeepSeek-Reasonix/pulls?q=is%3Apr+author%3Awqshan-cn" target="_blank" rel="noopener noreferrer" aria-label="在新标签页查看 Reasonix 贡献记录">查看贡献 <span aria-hidden="true">↗</span></a></div></div>
       </article>
     </div>
     <a class="site-note" href="https://github.com/wqshan-cn/wqshan-cn.github.io" target="_blank" rel="noopener noreferrer"><span class="note-symbol" aria-hidden="true">⌘</span><span>这个小站，也是一次实践。<small>用对话构思，用代码表达，持续修订自己的个人主页。</small></span><span class="site-note-link">查看网页源码 <span aria-hidden="true">↗</span></span></a>
@@ -99,7 +131,7 @@
     <div class="journey-layout"><div><h2 id="journey-title">一路走来，<br>一路<span class="serif-accent">生长。</span></h2><p class="english-note">A work in progress.<br>And happily so.</p></div><ol class="timeline">
       <li><span class="timeline-date">2023</span><div><h3>穿上白大褂，打开新世界</h3><p>进入临床医学专业，也在课本之外，遇见了科研和数据。</p></div></li>
       <li><span class="timeline-date">2023—2025</span><div><h3>在课题组里，练习从零到一</h3><p>学习 R、生信分析与文献复现。经历试错，也完成了两篇生信文章。</p></div></li>
-      <li><span class="timeline-date">2025</span><div><h3>遇见 AI，把想法变成代码</h3><p>开始使用 AI Agent，尝试 vibecoding，并为 Reasonix 贡献了三个已合并的 PR。</p></div></li>
+      <li><span class="timeline-date">2025</span><div><h3>遇见 AI，把想法变成代码</h3><p>开始使用 AI Agent，尝试 vibecoding；在 Reasonix 完成两个已合并 PR，并获得一次维护者整合后的共同署名。</p></div></li>
       <li class="timeline-current"><span class="timeline-date">接下来 <span class="status-dot"></span></span><div><h3>继续在交界处探索</h3><p>把医学、生物信息和 AI 接起来。先做出一个真正有用的小工具，再向前一步。</p></div></li>
     </ol></div>
   </section>

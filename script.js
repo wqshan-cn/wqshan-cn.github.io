@@ -1,11 +1,11 @@
 (() => {
   'use strict';
-  // Decorative, deterministic clusters. This is an illustration, not research data.
+  // Decorative, deterministic single-cell atlas. These are illustrations, not research data.
   const group = document.getElementById('cell-points');
   if (group) {
     const clusters = [
-      [143, 104, 68, 40, '#788960'], [235, 146, 44, 27, '#a4aa70'],
-      [304, 68, 50, 30, '#b7664b'], [383, 117, 43, 38, '#526f5e']
+      [89, 78, 47, 28, '#788960'], [159, 121, 33, 21, '#a4aa70'],
+      [233, 61, 43, 27, '#b7664b'], [289, 113, 34, 25, '#526f5e']
     ];
     clusters.forEach(([cx, cy, rx, ry, color], cluster) => {
       const clusterGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
@@ -23,6 +23,45 @@
         clusterGroup.append(dot);
       }
       group.append(clusterGroup);
+    });
+  }
+
+  const heatmap = document.getElementById('heatmap-cells');
+  if (heatmap) {
+    const palette = ['#e8ebdf', '#d2dbc5', '#afc09d', '#778f70', '#b96a54'];
+    for (let row = 0; row < 5; row++) {
+      for (let col = 0; col < 12; col++) {
+        const cell = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        const signal = (row * 7 + col * 3 + (row === Math.floor(col / 2) ? 4 : 0)) % palette.length;
+        cell.setAttribute('x', String(col * 23.5));
+        cell.setAttribute('y', String(row * 24));
+        cell.setAttribute('width', '20');
+        cell.setAttribute('height', '20');
+        cell.setAttribute('rx', '1.5');
+        cell.setAttribute('fill', palette[signal]);
+        heatmap.append(cell);
+      }
+    }
+  }
+
+  const trajectory = document.getElementById('trajectory-points');
+  if (trajectory) {
+    const branches = [
+      [[38, 135], [165, 88], '#728a6c'], [[165, 88], [317, 34], '#b96852'],
+      [[165, 88], [317, 142], '#9da968'], [[165, 88], [240, 20], '#587568']
+    ];
+    branches.forEach(([[x1, y1], [x2, y2], color], branch) => {
+      for (let i = 0; i < 24; i++) {
+        const t = i / 23;
+        const bend = Math.sin(t * Math.PI) * (branch % 2 ? -12 : 12);
+        const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        dot.setAttribute('cx', (x1 + (x2 - x1) * t + Math.sin(i * 2.1 + branch) * 4).toFixed(2));
+        dot.setAttribute('cy', (y1 + (y2 - y1) * t + bend + Math.cos(i * 1.7) * 3).toFixed(2));
+        dot.setAttribute('r', (1.5 + (i % 3) * .35).toFixed(2));
+        dot.setAttribute('fill', color);
+        dot.setAttribute('opacity', '.76');
+        trajectory.append(dot);
+      }
     });
   }
 
