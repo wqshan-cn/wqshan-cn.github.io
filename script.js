@@ -89,16 +89,14 @@
   }
 
   const figures = [
-    { src: './assets/research-figures/figure-01.webp', label: 'FIG. 01', title: 'STUDY WORKFLOW', alt: '论文主图 1：研究流程图', position: '50% 50%' },
-    { src: './assets/research-figures/figure-02.webp', label: 'FIG. 02', title: 'DIFFERENTIAL EXPRESSION', alt: '论文主图 2：差异表达与通路分析', position: '50% 28%' },
-    { src: './assets/research-figures/figure-03.webp', label: 'FIG. 03', title: 'MODEL CONSTRUCTION', alt: '论文主图 3：模型构建与生存分析', position: '50% 34%' },
-    { src: './assets/research-figures/figure-04.webp', label: 'FIG. 04', title: 'SINGLE-CELL LANDSCAPE', alt: '论文主图 4：单细胞图谱与细胞通讯分析', position: '50% 29%' },
-    { src: './assets/research-figures/figure-05.webp', label: 'FIG. 05', title: 'SPATIAL TRANSCRIPTOMICS', alt: '论文主图 5：细胞轨迹与空间转录组分析', position: '50% 33%' },
-    { src: './assets/research-figures/figure-06.webp', label: 'FIG. 06', title: 'CLINICAL ASSOCIATION', alt: '论文主图 6：临床关联与通路富集分析', position: '50% 30%' },
-    { src: './assets/research-figures/figure-07.webp', label: 'FIG. 07', title: 'EXPRESSION VALIDATION', alt: '论文主图 7：基因表达与临床特征验证', position: '50% 30%' },
-    { src: './assets/research-figures/figure-08.webp', label: 'FIG. 08', title: 'EXPERIMENTAL VALIDATION', alt: '论文主图 8：实验验证与组织学结果', position: '50% 27%' },
-    { src: './assets/research-figures/supp-01.webp', label: 'SUPP. 01', title: 'EXPRESSION HEATMAPS', alt: '论文补充图 1：差异表达热图', position: '50% 50%' },
-    { src: './assets/research-figures/supp-02.webp', label: 'SUPP. 02', title: 'SURVIVAL ANALYSIS', alt: '论文补充图 2：生存分析曲线', position: '50% 35%' }
+    { src: './assets/research-figures/figure-02.webp', label: 'FIG. 02', title: 'DIFFERENTIAL EXPRESSION', alt: '论文主图 2：差异表达与通路分析' },
+    { src: './assets/research-figures/figure-03.webp', label: 'FIG. 03', title: 'MODEL CONSTRUCTION', alt: '论文主图 3：模型构建与生存分析' },
+    { src: './assets/research-figures/figure-04.webp', label: 'FIG. 04', title: 'SINGLE-CELL LANDSCAPE', alt: '论文主图 4：单细胞图谱与细胞通讯分析' },
+    { src: './assets/research-figures/figure-05.webp', label: 'FIG. 05', title: 'SPATIAL TRANSCRIPTOMICS', alt: '论文主图 5：细胞轨迹与空间转录组分析' },
+    { src: './assets/research-figures/figure-06.webp', label: 'FIG. 06', title: 'CLINICAL ASSOCIATION', alt: '论文主图 6：临床关联与通路富集分析' },
+    { src: './assets/research-figures/figure-07.webp', label: 'FIG. 07', title: 'EXPRESSION VALIDATION', alt: '论文主图 7：基因表达与临床特征验证' },
+    { src: './assets/research-figures/figure-08.webp', label: 'FIG. 08', title: 'EXPERIMENTAL VALIDATION', alt: '论文主图 8：实验验证与组织学结果' },
+    { src: './assets/research-figures/supp-02.webp', label: 'SUPP. 02', title: 'SURVIVAL ANALYSIS', alt: '论文补充图 2：生存分析曲线' }
   ];
   const figureCarousel = document.getElementById('figure-carousel');
   const activeFigure = document.getElementById('figure-active');
@@ -115,7 +113,6 @@
   function assignFigure(image, figure, includeAlt = false) {
     if (!image) return;
     image.src = figure.src;
-    image.style.objectPosition = figure.position;
     if (includeAlt) image.alt = figure.alt;
   }
   function showFigure(index, direction = 1) {
@@ -126,7 +123,7 @@
     assignFigure(backTwo, figures[(currentFigure + 2) % figures.length]);
     figureLabel.textContent = current.label;
     figureTitle.textContent = current.title;
-    figurePosition.textContent = String(currentFigure + 1).padStart(2, '0') + ' / ' + figures.length;
+    figurePosition.textContent = String(currentFigure + 1).padStart(2, '0') + ' / ' + String(figures.length).padStart(2, '0');
     figureTabs.forEach((tab, tabIndex) => {
       const selected = tabIndex === currentFigure;
       tab.setAttribute('aria-selected', String(selected));
