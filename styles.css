@@ -96,3 +96,10 @@ html[data-motion=off]{scroll-behavior:auto}html[data-motion=off] *,html[data-mot
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
 [data-light]::after{z-index:-1}
 @media(max-width:800px){.figure-stage{min-height:0;padding-block:20px}.canvas-bottom{margin-top:0}}
+/* Large glass surfaces use their existing optical layers rather than repeatedly
+   sampling and blurring the page underneath while scrolling. */
+.glass{backdrop-filter:none;-webkit-backdrop-filter:none}
+.site-header{backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+#figure-lightbox::backdrop{backdrop-filter:none;-webkit-backdrop-filter:none}
+.hero-orbit{will-change:transform}
+@media(max-width:800px),(pointer:coarse){.site-header{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(248,251,250,.93)}}

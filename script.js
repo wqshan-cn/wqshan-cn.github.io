@@ -124,24 +124,37 @@
   });
 
   const navLinks = [...document.querySelectorAll('nav a')];
+  const navSections = navLinks.map(link => document.querySelector(link.hash));
+  let activeNav = '';
+  let headerScrolled = false;
   let frame = 0;
   function onScroll() {
     frame = 0;
-    document.body.classList.toggle('scrolled', scrollY > 35);
+    // Read geometry before changing DOM, and only write when state changes.
+    const scrolled = scrollY > 35;
     let active = '';
-    navLinks.forEach(link => { if (document.querySelector(link.hash).getBoundingClientRect().top < 210) active = link.hash; });
-    navLinks.forEach(link => {
-      if (link.hash === active) link.setAttribute('aria-current', 'location');
-      else link.removeAttribute('aria-current');
-    });
+    navSections.forEach((section, i) => { if (section.getBoundingClientRect().top < 210) active = navLinks[i].hash; });
+    let nextFigure = current;
     if (sticky()) {
       const rect = region.getBoundingClientRect();
       const travel = region.offsetHeight - innerHeight;
       if (rect.top <= 100 && rect.bottom > innerHeight - 100 && travel > 0) {
         const next = Math.min(2, Math.max(0, Math.floor((-rect.top / travel) * 3)));
-        if (next !== current) showFigure(next);
+        nextFigure = next;
       }
     }
+    if (scrolled !== headerScrolled) {
+      headerScrolled = scrolled;
+      document.body.classList.toggle('scrolled', scrolled);
+    }
+    if (active !== activeNav) {
+      activeNav = active;
+      navLinks.forEach(link => {
+        if (link.hash === active) link.setAttribute('aria-current', 'location');
+        else if (link.hasAttribute('aria-current')) link.removeAttribute('aria-current');
+      });
+    }
+    if (nextFigure !== current) showFigure(nextFigure);
   }
   const queueScroll = () => { if (!frame) frame = requestAnimationFrame(onScroll); };
   addEventListener('scroll', queueScroll, { passive: true });
