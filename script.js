@@ -170,6 +170,10 @@
     toggle.setAttribute('aria-pressed', String(motion));
     toggle.textContent = reduced.matches ? '系统已减少动效' : motion ? '关闭动效' : '开启动效';
     toggle.disabled = reduced.matches;
+    document.querySelectorAll('.replay').forEach(button => {
+      button.disabled = !motion;
+      button.title = motion ? '重新播放这幅小动画' : '动效已关闭，保留静态图';
+    });
     if (!motion) {
       document.getAnimations().forEach(a => a.cancel());
       document.querySelectorAll('[data-light]').forEach(el => { el.style.removeProperty('--pointer-x'); el.style.removeProperty('--pointer-y'); });
@@ -193,12 +197,55 @@
     const isContact = entry.target.closest('.contact');
     const isAbout = entry.target.closest('.about');
     const from = isHero ? 'translateY(10px) scale(.98)' : isContact ? 'scale(.94)' : isYear ? 'translateX(24px)' : isAbout ? 'translateY(12px)' : 'translateY(22px)';
+    const siblings = isHero ? [...isHero.querySelectorAll('[data-reveal]')] : entry.target.parentElement.classList.contains('milestones') ? [...entry.target.parentElement.children] : [];
+    const delay = Math.max(0, siblings.indexOf(entry.target)) * 100;
     entry.target.animate([
       { opacity: .15, transform: from },
       { opacity: 1, transform: 'translate(0) scale(1)' }
-    ], { duration: isContact ? 1000 : isYear ? 850 : 750, easing: 'cubic-bezier(.16,1,.3,1)' });
+    ], { duration: isContact ? 1000 : isYear ? 850 : 750, delay, fill: 'backwards', easing: 'cubic-bezier(.16,1,.3,1)' });
   }), { threshold: .12 });
   document.querySelectorAll('[data-reveal]').forEach(el => revealObserver.observe(el));
+  // Reveal small groups once; leave content readable before JS and after cancellation.
+  const groupObserver = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    groupObserver.unobserve(entry.target);
+    if (!motion || document.hidden) return;
+    const workflow = entry.target.matches('.project-visual');
+    const items = workflow ? entry.target.querySelectorAll('.agent-steps > span') : entry.target.querySelectorAll('.future-card');
+    items.forEach((item, i) => item.animate([
+      { opacity: .25, transform: workflow ? 'translateX(12px)' : 'translateY(18px)' },
+      { opacity: 1, transform: 'translate(0)' }
+    ], { duration: workflow ? 550 : 700, delay: i * 130, fill: 'backwards', easing: 'cubic-bezier(.16,1,.3,1)' }));
+  }), { threshold: .15 });
+  document.querySelectorAll('.project-visual,.future-grid').forEach(el => groupObserver.observe(el));
+  document.querySelectorAll('.now-list details').forEach(detail => {
+    detail.addEventListener('toggle', () => {
+      const paragraph = detail.querySelector('p');
+      paragraph.getAnimations().forEach(a => a.cancel());
+      if (!detail.open || !motion || document.hidden) return;
+      paragraph.animate([{ opacity: .25, transform: 'translateY(-6px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: 320, easing: 'cubic-bezier(.16,1,.3,1)' });
+    });
+  });
+  // Finite illustration gestures: no idle animation loop or extra blur.
+  function playIllustration(card) {
+    if (!motion || document.hidden) return;
+    const piece = card.querySelector('[data-piece]');
+    if (!piece) return;
+    piece.getAnimations().forEach(a => a.cancel());
+    const frames = card.querySelector('.art-vibe')
+      ? [{ opacity: .25, transform: 'translateY(5px)' }, { opacity: 1, transform: 'translateY(0)' }]
+      : [{ opacity: .35, transform: 'translateY(7px) scale(.9)' }, { opacity: 1, transform: 'translateY(-3px) scale(1.04)', offset: .65 }, { opacity: 1, transform: 'translateY(0) scale(1)' }];
+    piece.animate(frames, { duration: 1400, easing: 'cubic-bezier(.16,1,.3,1)' });
+  }
+  const illustrationObserver = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    illustrationObserver.unobserve(entry.target);
+    playIllustration(entry.target);
+  }), { threshold: .35 });
+  document.querySelectorAll('[data-illustration]').forEach(card => {
+    illustrationObserver.observe(card);
+    card.querySelector('.replay').addEventListener('click', () => playIllustration(card));
+  });
   document.querySelectorAll('[data-light]').forEach(el => {
     let lightFrame = 0;
     el.addEventListener('pointermove', e => {
@@ -221,7 +268,10 @@
     orbit.style.animationPlayState = entries[0].isIntersecting ? 'running' : 'paused';
   }).observe($('home'));
   document.addEventListener('visibilitychange', () => {
-    if (document.hidden) root.dataset.pageHidden = '';
+    if (document.hidden) {
+      root.dataset.pageHidden = '';
+      document.getAnimations().forEach(a => a.cancel());
+    }
     else delete root.dataset.pageHidden;
   });
   $('copy-email').addEventListener('click', async () => {

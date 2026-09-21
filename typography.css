@@ -1,0 +1,54 @@
+/* Self-hosted, page-subset fonts. Keep system fallbacks for newly added glyphs. */
+@font-face{font-family:"Portfolio Sans SC";src:url("./assets/fonts/noto-sans-sc.woff2") format("woff2");font-style:normal;font-weight:400 600;font-display:swap}
+@font-face{font-family:"Portfolio Serif SC";src:url("./assets/fonts/noto-serif-sc.woff2") format("woff2");font-style:normal;font-weight:400 600;font-display:swap}
+@font-face{font-family:"Portfolio Manrope";src:url("./assets/fonts/manrope.woff2") format("woff2");font-style:normal;font-weight:300 600;font-display:swap}
+:root{--sans:"Portfolio Manrope","Portfolio Sans SC","PingFang SC","Microsoft YaHei",sans-serif;--serif:"Portfolio Serif SC","Songti SC","SimSun",serif;--display:"Portfolio Serif SC","Songti SC","SimSun",serif}
+body{font-family:var(--sans);font-weight:400;line-height:1.85}
+h1,h2,h3,h4{font-kerning:normal;text-wrap:balance}
+p{line-break:strict}
+.hero h1{font-family:var(--sans);font-weight:500;font-size:clamp(43px,5.65vw,82px);letter-spacing:-.045em;line-height:1.34}
+.hero h1 em{font-family:var(--display);font-weight:500;font-size:1.04em;letter-spacing:.055em;margin-top:16px}
+.hello{font-family:"Portfolio Manrope",sans-serif;font-size:17px;font-weight:400;letter-spacing:.035em}
+.hero-fields{font-size:12px;letter-spacing:.09em}
+.wordmark{font-family:var(--display);font-size:23px;font-weight:600;letter-spacing:.025em}
+nav a{font-weight:500;letter-spacing:.035em}
+.about-editorial h2,.research-heading h2,.future-heading h2,.journey-intro h2,.contact-surface h2{font-family:var(--display);font-weight:500;letter-spacing:.015em;line-height:1.5}
+.about-editorial h2{font-size:clamp(30px,3.45vw,48px)}
+.about-copy .lead{font-family:var(--display);font-weight:500;font-size:23px;line-height:1.95}
+.about-copy p,.project-story>p:not(.technical){line-height:2.05;letter-spacing:.025em}
+.code-heading h2,.now h2{font-family:var(--sans);font-weight:500;letter-spacing:-.035em;line-height:1.4}
+.research-info h3{font-family:var(--display);font-weight:500;font-size:30px;line-height:1.5;letter-spacing:.025em}
+.research-info p{font-size:14px;line-height:1.95}
+.case-panel h4{font-family:var(--sans);font-weight:500;font-size:clamp(23px,2.35vw,33px);letter-spacing:-.02em;line-height:1.5}
+.case-notes p{font-size:13px;line-height:1.9}
+.project-story h3{font-family:var(--sans);font-weight:400;letter-spacing:.005em}.project-story h3 span{font-family:var(--serif)}
+.future-card h3{font-family:var(--display);font-weight:500;font-size:21px;line-height:1.6;letter-spacing:.005em}
+.future-card p{font-size:14px;line-height:1.95;letter-spacing:.015em}
+.chapters h3{font-family:var(--display);font-weight:500;font-size:23px;line-height:1.6;letter-spacing:.015em}
+.chapters p{line-height:2;letter-spacing:.02em}
+.year,.milestones strong{font-family:"Portfolio Manrope",var(--sans);font-weight:300;font-variant-numeric:lining-nums proportional-nums;letter-spacing:-.065em}
+.year-now{font-family:var(--serif);font-weight:400}
+.milestones strong{font-size:clamp(62px,7.6vw,104px)}
+.discipline{font-family:"Portfolio Manrope",sans-serif;font-weight:300;letter-spacing:-.065em}
+.now-word{font-family:"Portfolio Manrope",sans-serif;font-weight:300;letter-spacing:-.045em}
+.contact-email{font-family:"Portfolio Manrope",sans-serif;font-weight:400;letter-spacing:-.025em}
+.art-word,.future-note span,.hero-specimen{font-family:Georgia,"Times New Roman",serif}
+.section-kicker,.technical,.canvas-top,.canvas-bottom{line-height:1.6}
+@media(max-width:1100px){.future-card h3{font-size:19px}}
+@media(max-width:800px){
+.hero h1{font-size:clamp(29px,7.45vw,54px);letter-spacing:-.05em;line-height:1.4}
+.hero h1 em{font-size:1.1em;letter-spacing:.07em;margin-top:16px}
+.hello{font-size:15px}.hero-fields{font-size:10px;letter-spacing:.035em}
+.wordmark{font-size:21px}nav a{font-size:11px;letter-spacing:0}
+.about-editorial h2{font-size:clamp(27px,7.5vw,40px);letter-spacing:0}
+.about-copy .lead{font-size:21px}.about-copy p{font-size:14px;letter-spacing:0}
+.research-heading h2,.future-heading h2{font-size:37px;line-height:1.5;letter-spacing:0}
+.research-info h3{font-size:25px;letter-spacing:0}
+.code-heading h2{font-size:37px}.now h2{font-size:34px}
+.case-panel h4{font-size:25px;letter-spacing:-.02em}
+.future-card h3{font-size:21px}.future-card p{font-size:14px;letter-spacing:0}
+.chapters h3{font-size:21px}.journey-intro h2{font-size:38px}
+.contact-surface h2{font-size:33px;line-height:1.55}.contact-email{font-size:clamp(16px,4.55vw,29px);letter-spacing:-.04em}
+.milestones strong{font-size:55px}.year{font-size:92px}
+}
+@media(max-width:370px){.milestones strong{font-size:45px}.research-heading h2,.future-heading h2{font-size:33px}.contact-surface h2{font-size:29px}.case-panel h4{font-size:23px}}
