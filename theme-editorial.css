@@ -1,4 +1,4 @@
-/* Local review: obsidian glass, silver light and a restrained warm accent. */
+/* Obsidian glass, silver light and a restrained warm accent. */
 @media(prefers-reduced-motion:no-preference){html[data-motion=on] .hero-cta>span:last-child{transition:transform .3s cubic-bezier(.16,1,.3,1)}html[data-motion=on] .hero-cta:hover>span:last-child{transform:translateY(4px)}}
 :root{color-scheme:dark;--ink:#eeefef;--muted:#a6aaad;--accent:#dbc8a1;--paper:#08090b;--line:rgba(221,230,238,.16);--glass-bg:rgba(30,34,40,.65);--glass-border:rgba(227,239,249,.25);--glass-highlight:rgba(255,255,255,.3);--glass-shadow:0 24px 65px -30px #000c}
 body.scrolled .site-header{background:rgba(17,20,24,.94)}.wordmark span{color:#dbc8a1}
@@ -116,3 +116,23 @@ html[data-motion=on] .glass:hover>.glass-sheen::after{animation:glass-reflection
  backdrop-filter:blur(18px) saturate(1.15);
 }}
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.site-header,body.scrolled .site-header{background:rgba(17,23,30,.96)}}
+
+/* Keep the small-screen composition readable while preserving the glass accent. */
+:focus-visible{outline-color:#e6d1a8}
+::selection{background:#d8c8a9;color:#10151a}
+.milestones small{display:block;margin-top:4px;color:#b6a787;font-size:12px;line-height:1.5}
+@media(max-width:600px){
+  .site-header{width:calc(100% - 24px);padding:8px 12px;gap:8px}
+  .site-header nav{flex:1;justify-content:space-between;gap:0;min-width:0}
+  .site-header nav a{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:0 3px}
+  .site-header .nav-contact{display:none}
+  .hero-orbit,.hero-orbit.glass{width:360px;height:360px;right:-258px;top:47%;opacity:.72;animation:none!important;will-change:auto}
+  .orbit-core{inset:48px}
+  .milestones small{font-size:10px}
+}
+@media(max-width:370px){
+  .about-copy{margin-left:0}
+  .about-copy .lead br{display:none}
+  .about-editorial{gap:28px}
+  .hero-orbit,.hero-orbit.glass{right:-268px;opacity:.66}
+}

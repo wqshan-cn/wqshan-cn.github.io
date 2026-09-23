@@ -52,3 +52,5 @@ nav a{font-weight:500;letter-spacing:.035em}
 .milestones strong{font-size:55px}.year{font-size:92px}
 }
 @media(max-width:370px){.milestones strong{font-size:45px}.research-heading h2,.future-heading h2{font-size:33px}.contact-surface h2{font-size:29px}.case-panel h4{font-size:23px}}
+@media(max-width:600px){.site-header nav a{font-size:12px;letter-spacing:0}}
+@media(max-width:370px){.about-copy .lead{font-size:19px;line-height:1.75}.code-heading h2{font-size:32px}}
